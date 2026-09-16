@@ -2,7 +2,7 @@
 
 @section('title', data_get($page, 'seo_title') ?: (data_get($legal, 'doc.title') . ' | Silva Stone'))
 @section('meta_description', data_get($page, 'seo_description') ?: data_get($legal, 'intro.aside'))
-@section('body_attrs', 'data-page="legal"')
+@section('body_attrs') data-page="legal" @endsection
 @section('body_class', 'bg-soft')
 
 @php

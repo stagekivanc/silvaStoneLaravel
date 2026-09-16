@@ -2,7 +2,7 @@
 
 @section('title', data_get($page, 'seo_title') ?: 'İletişim | Silva Stone')
 @section('meta_description', data_get($page, 'seo_description') ?: 'Silva Stone proje, numune ve showroom talepleri için Acarkon ekibiyle iletişime geçin.')
-@section('body_attrs', 'data-page="contact"')
+@section('body_attrs') data-page="contact" @endsection
 
 @php
   $lang = app()->getLocale();

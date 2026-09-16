@@ -54,7 +54,8 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 /* Scrolled light header */
-#site-header.is-scrolled {
+#site-header.is-scrolled,
+body[data-page] #site-header {
   background: rgba(247, 247, 245, 0.88);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(228, 226, 221, 0.9);
@@ -65,28 +66,35 @@ body[data-page] #site-header.is-scrolled {
   backdrop-filter: none;
   border-bottom: 1px solid #ececec;
 }
-#site-header.is-scrolled .logo-header-light { display: none; }
-#site-header.is-scrolled .logo-header-dark { display: block; }
+#site-header.is-scrolled .logo-header-light,
+body[data-page] #site-header .logo-header-light { display: none; }
+#site-header.is-scrolled .logo-header-dark,
+body[data-page] #site-header .logo-header-dark { display: block; }
 #site-header .header-byline {
   color: rgba(255, 255, 255, 0.72);
   font-weight: 400;
 }
-#site-header.is-scrolled .header-byline {
+#site-header.is-scrolled .header-byline,
+body[data-page] #site-header .header-byline {
   color: rgba(23, 23, 23, 0.72);
 }
 
-#site-header.is-scrolled .pill-btn {
+#site-header.is-scrolled .pill-btn,
+body[data-page] #site-header .pill-btn {
   background: #171717;
   color: #fff;
   backdrop-filter: none;
 }
-#site-header.is-scrolled .pill-btn:hover {
+#site-header.is-scrolled .pill-btn:hover,
+body[data-page] #site-header .pill-btn:hover {
   background: #0c0c0c;
 }
-#site-header.is-scrolled .lang-btn {
+#site-header.is-scrolled .lang-btn,
+body[data-page] #site-header .lang-btn {
   color: rgba(255, 255, 255, 0.5);
 }
-#site-header.is-scrolled .lang-btn.is-active {
+#site-header.is-scrolled .lang-btn.is-active,
+body[data-page] #site-header .lang-btn.is-active {
   color: #fff;
   background: rgba(255, 255, 255, 0.14);
 }

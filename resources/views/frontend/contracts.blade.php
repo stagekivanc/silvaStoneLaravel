@@ -2,7 +2,7 @@
 
 @section('title', data_get($page, 'seo_title') ?: 'Sözleşmeler | Silva Stone')
 @section('meta_description', data_get($page, 'seo_description') ?: 'Silva Stone gizlilik, aydınlatma, çerez, güvenlik ve KVKK metinleri.')
-@section('body_attrs', 'data-page="legal"')
+@section('body_attrs') data-page="legal" @endsection
 @section('body_class', 'bg-soft')
 
 @php

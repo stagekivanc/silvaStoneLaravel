@@ -2,7 +2,7 @@
 
 @section('title', ($product['title'] ?? 'Ürün') . ' | Silva Stone')
 @section('meta_description', $product['lead'] ?: (($product['title'] ?? '') . ' — Silva Stone dekoratif taş duvar paneli.'))
-@section('body_attrs', 'data-page="product"')
+@section('body_attrs') data-page="product" @endsection
 @section('og_image', $product['img'] ?? '')
 
 @php

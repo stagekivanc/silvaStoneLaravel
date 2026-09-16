@@ -11,7 +11,7 @@
   const id = new URLSearchParams(location.search).get('id');
   const project = projects.find((p) => p.id === id);
   if (!project) {
-    location.replace('projeler.html');
+    location.replace(window.SILVA_PROJECTS_URL || window.SILVA_ROUTES?.projects || '/');
     return;
   }
 
@@ -35,12 +35,15 @@
   document.querySelector('meta[property="og:description"]')?.setAttribute('content', project.lead || '');
   if (gallery[0]) document.querySelector('meta[property="og:image"]')?.setAttribute('content', gallery[0]);
 
+  const projectsListUrl = window.SILVA_PROJECTS_URL || window.SILVA_ROUTES?.projects || '/';
+  const productsListUrl = window.SILVA_PRODUCTS_URL || window.SILVA_ROUTES?.products || '/';
+  const contactUrl = window.SILVA_ROUTES?.contact || '/';
   const crumb = document.getElementById('pj-crumb');
   if (crumb) {
     crumb.innerHTML = `
-      <a href="projeler.html">Projeler</a>
+      <a href="${esc(projectsListUrl)}">Projeler</a>
       <span>/</span>
-      <a href="projeler.html?type=${esc(project.type)}">${esc(typeName)}</a>
+      <a href="${esc(projectsListUrl)}?type=${esc(project.type)}">${esc(typeName)}</a>
       <span>/</span>
       <span>${esc(project.title)}</span>`;
   }
@@ -92,7 +95,7 @@
 
   const aside = document.getElementById('pj-aside');
   if (aside) {
-    const productHref = product ? window.silvaHref(product) : project.product ? `urunler.html?q=${encodeURIComponent(project.product)}` : 'urunler.html';
+    const productHref = product ? window.silvaHref(product) : project.product ? `${productsListUrl}?q=${encodeURIComponent(project.product)}` : productsListUrl;
     const productTitle = product ? window.silvaTitle(product) : project.product || 'Koleksiyon';
     const productImg = product && product.img ? product.img : gallery[0];
     aside.innerHTML = `
@@ -104,8 +107,8 @@
           <em>Kullanılan panel</em>
         </span>
       </a>
-      <a href="iletisim.html" class="pj-cta">Bu uygulamayı konuş</a>
-      <a href="projeler.html?type=${esc(project.type)}" class="pj-ghost">${esc(typeName)} projeleri</a>`;
+      <a href="${esc(contactUrl)}" class="pj-cta">Bu uygulamayı konuş</a>
+      <a href="${esc(projectsListUrl)}?type=${esc(project.type)}" class="pj-ghost">${esc(typeName)} projeleri</a>`;
   }
 
   const galleryEl = document.getElementById('pj-gallery');

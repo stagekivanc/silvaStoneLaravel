@@ -1,5 +1,8 @@
 (function SilvaCart() {
   const KEY = 'silvastone-cart';
+  const productsUrl = () => window.SILVA_PRODUCTS_URL || window.SILVA_ROUTES?.products || '/';
+  const privacyUrl = () => window.SILVA_ROUTES?.privacy || '/';
+  const kvkkUrl = () => window.SILVA_ROUTES?.kvkk || '/';
 
   const read = () => {
     try {
@@ -176,7 +179,7 @@
           <div class="cart-empty" id="cart-empty">
             <span><i class="bx bx-shopping-bag"></i></span>
             <p>Sepetiniz boş.</p>
-            <a href="urunler.html" class="cart-empty-btn">Ürünlere git</a>
+            <a href="${productsUrl()}" class="cart-empty-btn">Ürünlere git</a>
           </div>
           <div class="cart-list" id="cart-list"></div>
         </div>
@@ -273,7 +276,7 @@
             <div class="contact-form-foot">
               <label class="contact-consent">
                 <input id="qf-kvkk" type="checkbox" required />
-                <span>Kişisel verilerin <a href="aydinlatma-metni.html">aydınlatma metni</a> ve <a href="gizlilik-politikasi.html">gizlilik politikası</a> kapsamında işlenmesini kabul ediyorum.</span>
+                <span>Kişisel verilerin <a href="${kvkkUrl()}">aydınlatma metni</a> ve <a href="${privacyUrl()}">gizlilik politikası</a> kapsamında işlenmesini kabul ediyorum.</span>
               </label>
               <button type="submit" class="contact-submit">
                 <span>Talebi gönder</span>

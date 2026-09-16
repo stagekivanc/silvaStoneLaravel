@@ -13,7 +13,7 @@
   const code = new URLSearchParams(location.search).get('code');
   const product = products.find((p) => p.code === code);
   if (!product) {
-    location.replace('urunler.html');
+    location.replace(window.SILVA_PRODUCTS_URL || window.SILVA_ROUTES?.products || '/');
     return;
   }
 
@@ -32,10 +32,11 @@
   document.querySelector('meta[property="og:title"]')?.setAttribute('content', `${name} | Silva Stone`);
   document.querySelector('meta[property="og:url"]')?.setAttribute('href', pageUrl);
 
+  const productsListUrl = window.SILVA_PRODUCTS_URL || window.SILVA_ROUTES?.products || '/';
   document.getElementById('pdp-crumb').innerHTML = `
-    <a href="urunler.html">Koleksiyon</a>
+    <a href="${esc(productsListUrl)}">Koleksiyon</a>
     <span>/</span>
-    <a href="urunler.html?cat=${esc(product.cat)}">${esc(catName)}</a>
+    <a href="${esc(productsListUrl)}?cat=${esc(product.cat)}">${esc(catName)}</a>
     <span>/</span>
     <span>${esc(product.code)}</span>`;
 

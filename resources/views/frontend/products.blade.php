@@ -2,7 +2,7 @@
 
 @section('title', data_get($page, 'seo_title') ?: 'Ürünler | Silva Stone')
 @section('meta_description', data_get($page, 'seo_description') ?: 'Silva Stone Stonex ve Stoneart dekoratif taş duvar panelleri.')
-@section('body_attrs', 'data-page="products"')
+@section('body_attrs') data-page="products" @endsection
 
 @php
   $intro = data_get($productsPage, 'intro', []);

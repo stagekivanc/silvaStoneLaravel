@@ -2,7 +2,7 @@
 
 @section('title', data_get($page, 'seo_title') ?: 'Projeler | Silva Stone Uygulamaları')
 @section('meta_description', data_get($page, 'seo_description') ?: 'Silva Stone dekoratif taş panellerinin otel, konut, restoran ve cephe uygulamaları.')
-@section('body_attrs', 'data-page="projects"')
+@section('body_attrs') data-page="projects" @endsection
 
 @php
   $intro = data_get($projectsPage, 'intro', []);

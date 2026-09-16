@@ -46,8 +46,8 @@
     </div>
 
     <a href="{{ $homeUrl }}" class="header-brand justify-self-center flex flex-col items-center leading-none">
-      <img src="{{ silva_asset('assets/silvalogo-white.svg') }}" alt="Silva Stone" class="logo-header-light h-14 w-auto md:h-14" />
-      <img src="{{ silva_asset('assets/silvalogo.svg') }}" alt="Silva Stone" class="logo-header-dark hidden h-14 w-auto md:h-14" />
+      <img src="{{ silva_asset('assets/silvalogo-white.png') }}" alt="Silva Stone" class="logo-header-light h-12 w-auto md:h-14" />
+      <img src="{{ silva_asset('assets/silvalogo.png') }}" alt="Silva Stone" class="logo-header-dark hidden h-12 w-auto md:h-14" />
     </a>
 
     <div class="header-actions flex items-center justify-self-end gap-2 md:gap-2.5">

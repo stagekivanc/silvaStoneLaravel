@@ -1,7 +1,7 @@
 window.SILVA_CATS = window.SILVA_CATS || { all: 'Tümü', stonex: 'Stonex', stoneart: 'Stoneart' };
 window.SILVA_COLORS = window.SILVA_COLORS || { all: 'Tümü', beyaz: 'Beyaz', krem: 'Krem', bej: 'Bej', antrasit: 'Antrasit', siyah: 'Siyah' };
 window.SILVA_PRODUCTS = window.SILVA_PRODUCTS || [];
-window.SILVA_PRODUCTS_URL = window.SILVA_PRODUCTS_URL || 'urunler.html';
+window.SILVA_PRODUCTS_URL = window.SILVA_PRODUCTS_URL || (window.SILVA_ROUTES && window.SILVA_ROUTES.products) || '';
 window.silvaTitle =
   window.silvaTitle ||
   ((p) => (p && (p.title || String(p.name || '').replace(/\s+Duvar Paneli$/, ''))) || '');

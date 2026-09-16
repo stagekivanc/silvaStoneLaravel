@@ -1,4 +1,5 @@
 (function SilvaSearch() {
+  const productsUrl = () => window.SILVA_PRODUCTS_URL || window.SILVA_ROUTES?.products || '/';
   const mount = () => {
     const menu = document.querySelector('#site-header .menu-wrap');
     if (!menu || document.getElementById('search-toggle')) return;
@@ -36,7 +37,7 @@
       'beforeend',
       `<div class="search-overlay" id="search-overlay" aria-hidden="true">
         <div class="search-panel" role="dialog" aria-modal="true" aria-labelledby="search-title">
-          <form class="search-form" id="search-form" action="urunler.html" method="get">
+          <form class="search-form" id="search-form" action="${productsUrl()}" method="get">
             <i class="bx bx-search" aria-hidden="true"></i>
             <input id="search-input" type="search" name="q" placeholder="Ürün adı veya kodu yazın" autocomplete="off" />
             <kbd>esc</kbd>
@@ -65,7 +66,7 @@
         return;
       }
       const script = document.createElement('script');
-      script.src = 'js/products.js';
+      script.src = (window.SILVA_BASE || '').replace(/\/$/, '') + '/js/products.js';
       script.onload = cb;
       document.head.appendChild(script);
     };
@@ -91,10 +92,10 @@
       const term = (q || '').trim();
       close();
       if (!term) {
-        location.href = 'urunler.html';
+        location.href = productsUrl();
         return;
       }
-      location.href = `urunler.html?q=${encodeURIComponent(term)}`;
+      location.href = `${productsUrl()}?q=${encodeURIComponent(term)}`;
     };
 
     const renderHits = () => {

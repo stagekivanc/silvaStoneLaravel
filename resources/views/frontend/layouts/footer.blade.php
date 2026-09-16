@@ -44,7 +44,7 @@
     <div class="grid gap-12 border-b border-white/10 pb-14 lg:grid-cols-12 lg:gap-10">
       <div class="site-footer-brand lg:col-span-4">
         <a href="{{ $homeUrl }}" class="inline-flex flex-col items-start">
-          <img src="{{ silva_asset('assets/silvalogo-white.svg') }}" alt="Silva Stone" class="h-14 w-auto md:h-14" />
+          <img src="{{ silva_asset('assets/silvalogo-white.png') }}" alt="Silva Stone" class="h-12 w-auto md:h-14" />
         </a>
         <p class="mt-5 max-w-sm text-sm font-light leading-relaxed">{{ $brandText }}</p>
         <div class="mt-6 flex flex-wrap gap-2">

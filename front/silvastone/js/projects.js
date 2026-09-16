@@ -8,7 +8,7 @@ window.SILVA_PROJECT_TYPES = window.SILVA_PROJECT_TYPES || {
   cephe: 'Cephe',
 };
 window.SILVA_PROJECTS = window.SILVA_PROJECTS || [];
-window.SILVA_PROJECTS_URL = window.SILVA_PROJECTS_URL || 'projeler.html';
+window.SILVA_PROJECTS_URL = window.SILVA_PROJECTS_URL || (window.SILVA_ROUTES && window.SILVA_ROUTES.projects) || '';
 window.silvaProjectHref =
   window.silvaProjectHref ||
   ((p) => (p && p.url) || window.SILVA_PROJECTS_URL + '/' + encodeURIComponent(p.slug || p.id));

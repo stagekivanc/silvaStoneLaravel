@@ -2,7 +2,7 @@
 
 @section('title', data_get($project, 'seo_title') ?: (($projectModel->title ?? 'Proje') . ' | Silva Stone'))
 @section('meta_description', data_get($project, 'seo_description') ?: ($project['lead'] ?? ''))
-@section('body_attrs', 'data-page="project"')
+@section('body_attrs') data-page="project" @endsection
 @section('og_image', $project['img'] ?? '')
 
 @php

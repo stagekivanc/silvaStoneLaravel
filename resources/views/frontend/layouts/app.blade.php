@@ -32,8 +32,8 @@
   @endforeach
 
   @php($social = seo_social_defaults($layoutPage))
-  <link rel="icon" href="{{ site_favicon_url(silva_asset('assets/silvalogo.svg')) }}" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="{{ site_favicon_url(silva_asset('assets/silvalogo.svg')) }}" />
+  <link rel="icon" href="{{ site_favicon_url(silva_asset('assets/silvalogo.png')) }}" type="image/png" />
+  <link rel="apple-touch-icon" href="{{ site_favicon_url(silva_asset('assets/silvalogo.png')) }}" />
 
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="{{ str_replace('-', '_', app()->getLocale()) }}" />
@@ -79,7 +79,18 @@
   </script>
   <link rel="stylesheet" href="{{ silva_asset('css/styles.css') }}" />
   @php($silvaBase = rtrim(silva_asset(), '/'))
-  <script>window.SILVA_BASE = @json($silvaBase);</script>
+  @php($silvaRoutes = ['home' => route('home', ['lang' => app()->getLocale()]), 'products' => m_url('products'), 'projects' => m_url('projects'), 'stores' => m_url('stores'), 'contact' => m_url('contact'), 'privacy' => m_url('privacy-policy'), 'cookies' => m_url('cookie-policy'), 'kvkk' => m_url('kvkk'), 'contracts' => m_url('contracts')])
+  <script>
+    window.SILVA_BASE = @json($silvaBase);
+    window.SILVA_ROUTES = @json($silvaRoutes);
+    window.SILVA_PRODUCTS_URL = window.SILVA_PRODUCTS_URL || window.SILVA_ROUTES.products;
+    window.SILVA_PROJECTS_URL = window.SILVA_PROJECTS_URL || window.SILVA_ROUTES.projects;
+    window.SILVA_STORES_URL = window.SILVA_STORES_URL || window.SILVA_ROUTES.stores;
+    window.silvaHref = window.silvaHref || function (p) {
+      if (p && p.href) return p.href;
+      return (window.SILVA_PRODUCTS_URL || '') + '/' + encodeURIComponent((p && (p.slug || p.code)) || '');
+    };
+  </script>
   @stack('head')
 </head>
 <body class="text-ink font-sans antialiased overflow-x-hidden @yield('body_class', 'bg-white')" @yield('body_attrs')>

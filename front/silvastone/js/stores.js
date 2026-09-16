@@ -12,7 +12,7 @@
     { city: 'eskisehir', cityLabel: 'Eskişehir', lat: 39.7767, lng: 30.5206, name: 'Acarkon Store — Eskişehir', addr: 'Yakında', maps: '' },
   ];
 
-  const storesUrl = window.SILVA_STORES_URL || 'magazalar.html';
+  const storesUrl = window.SILVA_STORES_URL || (window.SILVA_ROUTES && window.SILVA_ROUTES.stores) || '';
   const esc = (v) => String(v).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
   const rails = document.querySelectorAll('[data-store-rail]');

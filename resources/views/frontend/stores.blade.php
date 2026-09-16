@@ -2,7 +2,7 @@
 
 @section('title', data_get($page, 'seo_title') ?: 'Showroom | Silva Stone')
 @section('meta_description', data_get($page, 'seo_description') ?: 'Türkiye genelindeki Acarkon Store’larda Silva Stone panelleri görün, dokunun ve sipariş edin.')
-@section('body_attrs', 'data-page="stores"')
+@section('body_attrs') data-page="stores" @endsection
 
 @section('og_image', silva_asset('assets/acarkon-store-hero.jpg'))
 
