@@ -207,9 +207,11 @@ if (heroSpotlight) {
   const dotsWrap = document.getElementById('hero-prod-dots');
   const countEl = document.getElementById('hero-prod-count');
   const esc = (v) => String(v).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  const slidesData = (window.SILVA_HERO_SPOTLIGHT || [])
-    .map((code) => (window.SILVA_PRODUCTS || []).find((p) => p.code === code))
-    .filter(Boolean);
+  const spotlightCodes = window.SILVA_HERO_SPOTLIGHT || window.SILVA_HOME_FEATURED || [];
+  const slidesData = (spotlightCodes.length
+    ? spotlightCodes.map((code) => (window.SILVA_PRODUCTS || []).find((p) => p.code === code))
+    : (window.SILVA_PRODUCTS || []).slice(0, 8)
+  ).filter(Boolean);
 
   if (track && slidesData.length) {
     track.innerHTML = slidesData

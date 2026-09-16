@@ -279,6 +279,7 @@
     window.SILVA_COLORS = @json($homeColorMap);
     window.SILVA_PRODUCTS = @json($homeProducts);
     window.SILVA_HOME_FEATURED = @json($homeProductCodes);
+    window.SILVA_HERO_SPOTLIGHT = @json($homeProductCodes);
     window.SILVA_PRODUCTS_URL = @json($homeProductsUrl);
     window.silvaProjectHref = function (p) {
       return p.url || (window.SILVA_PROJECTS_URL + '/' + encodeURIComponent(p.slug || p.id));
@@ -296,7 +297,8 @@
         if (p.url && !/^https?:\/\//i.test(p.url)) p.url = fix(p.url);
       });
       window.silvaHref = function (p) {
-        return base + 'urun.html?code=' + encodeURIComponent(p.code);
+        if (p && p.href) return p.href;
+        return (window.SILVA_PRODUCTS_URL || '') + '/' + encodeURIComponent((p && (p.slug || p.code)) || '');
       };
     })();
   </script>
