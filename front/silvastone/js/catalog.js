@@ -78,7 +78,7 @@
 
   const galleryOf = (p) => [...new Set((p.imgs && p.imgs.length ? p.imgs : [p.img]).filter(Boolean))];
 
-  const media = (p) => {
+  const media = (p, index = 0) => {
     const gallery = galleryOf(p);
     if (!gallery.length) return `<span class="plp-ph">${esc(pending)}</span>`;
     const ticks =
@@ -87,7 +87,49 @@
             .map((_, i) => `<span class="plp-hover-tick${i === 0 ? ' is-on' : ''}"></span>`)
             .join('')}</span>`
         : '';
-    return `<img src="${esc(gallery[0])}" alt="${esc(p.name)}" loading="lazy" onerror="this.outerHTML='<span class=&quot;plp-ph&quot;>${esc(pending)}</span>'" />${ticks}`;
+    const src = esc(gallery[0]);
+    const eager = index < 6;
+    const imgAttrs = eager
+      ? `src="${src}" loading="eager" fetchpriority="${index < 2 ? 'high' : 'auto'}" decoding="async"`
+      : `src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="${src}" loading="lazy" decoding="async" class="plp-lazy"`;
+    return `<img ${imgAttrs} alt="${esc(p.name)}" onerror="this.outerHTML='<span class=&quot;plp-ph&quot;>${esc(pending)}</span>'" />${ticks}`;
+  };
+
+  const observeLazy = () => {
+    const imgs = grid.querySelectorAll('img.plp-lazy[data-src]');
+    if (!imgs.length) return;
+    if (!('IntersectionObserver' in window)) {
+      imgs.forEach((img) => {
+        img.src = img.dataset.src;
+        img.removeAttribute('data-src');
+        img.classList.remove('plp-lazy');
+      });
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const img = entry.target;
+          const src = img.dataset.src;
+          if (src) {
+            img.src = src;
+            img.removeAttribute('data-src');
+            img.classList.remove('plp-lazy');
+            img.addEventListener(
+              'load',
+              () => {
+                img.style.opacity = '1';
+              },
+              { once: true }
+            );
+          }
+          io.unobserve(img);
+        });
+      },
+      { rootMargin: '180px 0px', threshold: 0.01 }
+    );
+    imgs.forEach((img) => io.observe(img));
   };
 
   const title = window.silvaTitle;
@@ -162,14 +204,14 @@
     }
     emptyEl.hidden = true;
     grid.innerHTML = slice
-      .map((p) => {
+      .map((p, index) => {
         const gallery = galleryOf(p);
         const scrubAttrs =
           gallery.length > 1
             ? ` is-scrub" data-gallery="${gallery.map(esc).join('|')}" data-index="0`
             : '';
         return `<article class="plp-card">
-          <a href="${href(p)}" class="plp-card-media${scrubAttrs}">${media(p)}</a>
+          <a href="${href(p)}" class="plp-card-media${scrubAttrs}">${media(p, index)}</a>
           <div class="plp-card-info">
             <p class="plp-card-meta"><span>${esc(p.code)}</span><span>${esc(CATS[p.cat])}</span></p>
             <h2><a href="${href(p)}">${esc(title(p))}</a></h2>
@@ -178,6 +220,7 @@
         </article>`;
       })
       .join('');
+    observeLazy();
 
     if (pages <= 1) {
       pager.hidden = true;
@@ -291,7 +334,12 @@
     if (Number(media.dataset.index) === i) return;
     media.dataset.index = String(i);
     const img = media.querySelector('img');
-    if (img) img.src = imgs[i];
+    if (img) {
+      const next = imgs[i];
+      img.removeAttribute('data-src');
+      img.classList.remove('plp-lazy');
+      if (img.src !== next) img.src = next;
+    }
     media.querySelectorAll('.plp-hover-tick').forEach((tick, n) => tick.classList.toggle('is-on', n === i));
   };
 
@@ -301,9 +349,11 @@
       const media = e.target.closest('.plp-card-media.is-scrub');
       if (!media || media.dataset.preloaded) return;
       media.dataset.preloaded = '1';
-      (media.dataset.gallery || '').split('|').forEach((src) => {
-        if (!src) return;
+      const imgs = (media.dataset.gallery || '').split('|').filter(Boolean);
+      // Only warm the next couple of gallery frames, not the whole set.
+      imgs.slice(1, 3).forEach((src) => {
         const preload = new Image();
+        preload.decoding = 'async';
         preload.src = src;
       });
     },

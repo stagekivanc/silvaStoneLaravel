@@ -2758,6 +2758,11 @@ body[data-page="product"] {
   }
 }
 
+.plp-card {
+  content-visibility: auto;
+  contain-intrinsic-size: 420px;
+}
+
 .plp-card-media {
   position: relative;
   display: flex;
@@ -2765,8 +2770,17 @@ body[data-page="product"] {
   justify-content: center;
   overflow: hidden;
   aspect-ratio: 4 / 5;
-  background: #fff;
+  background: linear-gradient(180deg, #f4f3f0 0%, #ebeae6 100%);
   border: 1px solid #efefef;
+}
+
+.plp-card-media img.plp-lazy {
+  opacity: 0.35;
+}
+
+.plp-card-media img {
+  opacity: 1;
+  transition: opacity 0.25s ease;
 }
 
 .plp-card-media.is-scrub {
