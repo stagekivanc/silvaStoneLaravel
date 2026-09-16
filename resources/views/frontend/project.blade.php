@@ -24,7 +24,7 @@
   <article class="pj">
     <div class="mx-auto max-w-[1440px] px-5 md:px-8">
       <nav class="pj-crumb">
-        <a href="{{ $listUrl }}">Projeler</a>
+        <a href="{{ $listUrl }}">{{ __t('ui_projects', 'Projeler', 'frontend') }}</a>
         <span>/</span>
         <a href="{{ $listUrl }}?type={{ $project['type'] }}">{{ $typeName }}</a>
         <span>/</span>
@@ -34,7 +34,7 @@
 
     <div class="pj-hero" id="pj-hero">
       @if (!empty($gallery[0]))
-        <button type="button" class="pj-hero-open" aria-label="Görseli büyüt" data-gallery-index="0">
+        <button type="button" class="pj-hero-open" aria-label="{{ __t('ui_enlarge_image', 'Görseli büyüt', 'frontend') }}" data-gallery-index="0">
           <img src="{{ $gallery[0] }}" alt="{{ $project['title'] }}" />
         </button>
         <div class="pj-hero-cap">
@@ -70,7 +70,7 @@
               <img src="{{ $gallery[0] }}" alt="{{ $project['product'] ?: $project['title'] }}" />
             @endif
             <span>
-              <strong>{{ $project['product'] ?: 'Koleksiyon' }}</strong>
+              <strong>{{ $project['product'] ?: __t('ui_collection', 'Koleksiyon', 'frontend') }}</strong>
               <em>{{ data_get($detail, 'surface_hint', 'Kullanılan panel') }}</em>
             </span>
           </a>
@@ -82,7 +82,7 @@
       @if (count($gallery) > 1)
         <div class="pj-gallery" id="pj-gallery">
           @foreach (array_slice($gallery, 1) as $i => $src)
-            <button type="button" class="pj-shot" data-gallery-index="{{ $i + 1 }}" aria-label="Görseli büyüt">
+            <button type="button" class="pj-shot" data-gallery-index="{{ $i + 1 }}" aria-label="{{ __t('ui_enlarge_image', 'Görseli büyüt', 'frontend') }}">
               <img src="{{ $src }}" alt="{{ $project['title'] }}" />
             </button>
           @endforeach

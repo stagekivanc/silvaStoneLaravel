@@ -2,8 +2,12 @@
 
 namespace App\Support;
 
+use App\Support\Concerns\HasLocalizedDefaults;
+
 class SilvaProjectsDefaults
 {
+    use HasLocalizedDefaults;
+
     public static function places(): array
     {
         return \App\Models\ProjectPlace::filterMap();
@@ -14,7 +18,7 @@ class SilvaProjectsDefaults
         return \App\Models\ProjectType::filterMap();
     }
 
-    public static function data(): array
+    protected static function baseData(): array
     {
         return [
             'intro' => [
@@ -324,5 +328,122 @@ class SilvaProjectsDefaults
                 'order' => 12,
             ],
         ];
+    }
+
+    /**
+     * Full English copy for project translations, keyed by slug.
+     *
+     * @return array<string, array{title:string,lead:string,body:string,feats:array<int,string>,product_name:string}>
+     */
+    public static function englishBySlug(): array
+    {
+        return [
+            'lobi-feature-wall' => [
+                'title' => 'Lobby feature wall',
+                'product_name' => 'Slate Anthracite',
+                'lead' => 'In a boutique hotel lobby in Istanbul, a slate-textured anthracite surface turns the welcome wall into an architectural focal point.',
+                'body' => 'The feature wall behind reception gathers the lobby scale with warm light and natural stone character. Slate Anthracite panels in 600×1200 mm were installed indoors for fast mounting and low load. The vertical joint rhythm stays aligned with the hotel’s calm, dark material palette.',
+                'feats' => ['Feature-wall focus', 'Slate texture', 'Suited to evening lighting', 'Lightweight panel system'],
+            ],
+            'restoran-duvari' => [
+                'title' => 'Restaurant wall',
+                'product_name' => 'Rammed Earth Anthracite',
+                'lead' => 'A restaurant dining room in Ankara gained acoustic and visual depth with a rammed-earth texture.',
+                'body' => 'The anthracite surface running along the dining area contrasts with the warm wood of the tables. Rammed Earth panels suit high traffic with stain-resistant performance. Near the kitchen opening, an easy-clean anti-dirt finish was preferred.',
+                'feats' => ['Built for heavy use', 'Anti-dirt surface', 'Acoustic depth', 'Fast installation'],
+            ],
+            'konut-accent-wall' => [
+                'title' => 'Residential accent wall',
+                'product_name' => 'Coarse Clothh Cream',
+                'lead' => 'In a living room in Konya, a cloth-textured cream panel creates a soft, natural accent wall.',
+                'body' => 'The textured surface chosen instead of a TV niche adds character without overwhelming the room. Coarse Clothh Cream reads warm in daylight and gives a gentle relief under evening LED strips. The thin panel build was applied without thickening the existing wall.',
+                'feats' => ['Cloth texture', 'Warm cream tone', 'Thin section', 'Scaled for homes'],
+            ],
+            'ofis-odak' => [
+                'title' => 'Office feature surface',
+                'product_name' => 'Sea White',
+                'lead' => 'On an office meeting floor in Bursa, a light stone panel keeps the brand wall calm.',
+                'body' => 'Sea White works with glass partitions and an open ceiling. Behind the meeting room it provides a clean plane for logo and projection; the same texture continues along the corridor. Lightweight panels were mounted to match the floor handover schedule.',
+                'feats' => ['Light tone', 'Office acoustic wall', 'Fast delivery', 'Brand wall'],
+            ],
+            'villa-cephe' => [
+                'title' => 'Villa facade',
+                'product_name' => 'Tetris Anthracite Design',
+                'lead' => 'A villa garden wall in Antalya produces architectural shadow with deep anthracite block texture under night lighting.',
+                'body' => 'Tetris Anthracite Design panels were detailed outdoors with wall lights and stair LEDs. Thin build and water resistance suited to Mediterranean climate were selected for longevity. The block rhythm shares the same palette as the dark stone paving in the landscape.',
+                'feats' => ['Exterior facade', 'Night lighting', 'Water resistance', 'Block texture'],
+            ],
+            'salon-tv-duvari' => [
+                'title' => 'Living room TV wall',
+                'product_name' => 'Slate Anthracite',
+                'lead' => 'A living-room feature wall in Istanbul frames the TV unit with a slate-textured anthracite surface.',
+                'body' => 'Suspended-ceiling light and side LED strips bring out the slate relief. Panel thinness leaves room for concealed cable runs and a soundbar niche. The indoor installation was completed with a bonding system over existing gypsum board.',
+                'feats' => ['TV wall', 'Concealed cabling', 'LED-ready', 'Slate texture'],
+            ],
+            'otel-spa' => [
+                'title' => 'Spa wet area',
+                'product_name' => 'Sea Anthracite',
+                'lead' => 'Wet-area walls in an Antalya hotel spa were resolved with moisture control and dark stone character.',
+                'body' => 'Sea Anthracite offers a waterproof surface suited to humid environments and cleaning regimes. The same texture continues through changing and rest corridors to complete the spa experience. The antibacterial surface aligns with hotel hygiene standards.',
+                'feats' => ['Wet area', 'Waterproof', 'Antibacterial', 'Moisture control'],
+            ],
+            'bahce-duvari' => [
+                'title' => 'Garden wall',
+                'product_name' => 'Tetris Cream Design',
+                'lead' => 'Cream tetris blocks on a residential garden wall in Tekirdağ become part of the landscape.',
+                'body' => 'Outdoors, Tetris Cream Design was kept in harmony with planting and light stone paving. A surface resistant to sun and rain supports long life on the garden wall. From a distance, the block pattern reads as architectural texture.',
+                'feats' => ['Garden wall', 'Outdoor use', 'Cream block texture', 'UV resistance'],
+            ],
+            'showroom-yuzey' => [
+                'title' => 'Showroom wall',
+                'product_name' => 'Mosaic White',
+                'lead' => 'At the Acarkon Store in Konya, a mosaic white surface becomes a wall that exhibits the product itself.',
+                'body' => 'The showroom display wall works as both sample and spatial identity. Mosaic White reveals texture under vitrine lighting; visitors experience the panel from close and afar. The same surface is repeated behind the reception desk.',
+                'feats' => ['Showroom display', 'Mosaic texture', 'Vitrine lighting', 'Brand surface'],
+            ],
+            'kafe-teras' => [
+                'title' => 'Cafe terrace wall',
+                'product_name' => 'Felleving Water Anthracite',
+                'lead' => 'A cafe terrace wall in Izmir gives the outdoor seating area an anthracite water-textured surface.',
+                'body' => 'Felleving Water Anthracite was chosen for wind and moisture on the open terrace. The vertical rhythm creates a calm backdrop with planters and metal railings. In the evening, wall-wash lighting strengthens the texture.',
+                'feats' => ['Open terrace', 'Outdoor use', 'Water texture', 'Wash lighting'],
+            ],
+            'otel-cephe' => [
+                'title' => 'Hotel exterior facade',
+                'product_name' => 'Tetris Anthracite Design',
+                'lead' => 'A hotel facade in Mardin adds a new stone reading to the city with a tetris block rhythm.',
+                'body' => 'Exterior panels were applied with an anthracite surface resistant to sun and dust. The entrance canopy and upper-floor rhythm share the same texture. The lightweight system covered a large area without adding excess load to the existing structure.',
+                'feats' => ['Large facade', 'Outdoor climate', 'Lightweight system', 'Block rhythm'],
+            ],
+            'residans-salon' => [
+                'title' => 'Residence living room',
+                'product_name' => 'Banana Leaf Pattern Cream',
+                'lead' => 'In a residence living room in Ankara, a leaf-patterned cream panel builds a soft, natural interior character.',
+                'body' => 'Banana Leaf Pattern Cream was used as a single wall behind the seating group. Pattern scale was chosen for the room so it gives a natural rhythm without excessive repetition. The interior reads differently in daylight and under lamp light.',
+                'feats' => ['Patterned surface', 'Residential living room', 'Cream palette', 'Single-wall focus'],
+            ],
+        ];
+    }
+
+    public static function englishProductName(?string $name): string
+    {
+        $name = trim((string) $name);
+        if ($name === '') {
+            return '';
+        }
+
+        $map = [
+            'Antrasit' => 'Anthracite',
+            'Beyaz' => 'White',
+            'Krem' => 'Cream',
+            'Siyah' => 'Black',
+            'Bej' => 'Beige',
+            'Desing' => 'Design',
+            'Banane' => 'Banana',
+            'Traverten' => 'Travertine',
+            'Duvar Paneli' => 'Wall Panel',
+        ];
+
+        return str_replace(array_keys($map), array_values($map), $name);
     }
 }

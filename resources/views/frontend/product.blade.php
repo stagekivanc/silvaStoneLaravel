@@ -37,14 +37,14 @@
         <div class="pdp-media" id="pdp-media">
           @if (count($gallery))
             <div class="pdp-stage-wrap">
-              <button type="button" class="pdp-stage" id="pdp-open" aria-label="Görseli büyüt">
+              <button type="button" class="pdp-stage" id="pdp-open" aria-label="{{ __t('ui_enlarge_image', 'Görseli büyüt', 'frontend') }}">
                 <img id="pdp-main" src="{{ $gallery[0] }}" alt="{{ $product['name'] }}" />
               </button>
               @if (count($gallery) > 1)
-                <button type="button" class="pdp-arrow pdp-arrow-prev" data-pdp-nav="-1" aria-label="Önceki görsel">
+                <button type="button" class="pdp-arrow pdp-arrow-prev" data-pdp-nav="-1" aria-label="{{ __t('ui_prev', 'Önceki', 'frontend') }}">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.2 4.8 7.8 12l7.4 7.2"/></svg>
                 </button>
-                <button type="button" class="pdp-arrow pdp-arrow-next" data-pdp-nav="1" aria-label="Sonraki görsel">
+                <button type="button" class="pdp-arrow pdp-arrow-next" data-pdp-nav="1" aria-label="{{ __t('ui_next', 'Sonraki', 'frontend') }}">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.8 4.8 16.2 12l-7.4 7.2"/></svg>
                 </button>
               @endif
@@ -85,9 +85,9 @@
           </dl>
           <div class="pdp-buy">
             <div class="pdp-qty" role="group" aria-label="{{ data_get($detail, 'qty', 'Adet') }}">
-              <button type="button" id="pdp-qty-minus" aria-label="Azalt">−</button>
+              <button type="button" id="pdp-qty-minus" aria-label="{{ __t('ui_decrease', 'Azalt', 'frontend') }}">−</button>
               <input id="pdp-qty" type="number" min="1" max="99" value="1" inputmode="numeric" aria-label="{{ data_get($detail, 'qty', 'Adet') }}" />
-              <button type="button" id="pdp-qty-plus" aria-label="Artır">+</button>
+              <button type="button" id="pdp-qty-plus" aria-label="{{ __t('ui_increase', 'Artır', 'frontend') }}">+</button>
             </div>
             <button type="button" class="pdp-cart" id="pdp-add"><i class="bx bx-shopping-bag"></i> {{ data_get($detail, 'add_cart', 'Sepete ekle') }}</button>
             <a class="pdp-quote" id="pdp-quote" target="_blank" rel="noopener">{{ data_get($detail, 'quote', 'Teklif al') }}</a>

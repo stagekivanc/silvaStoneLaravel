@@ -20,7 +20,7 @@
     <div class="mx-auto max-w-site px-5 md:px-8">
       <div class="page-intro-top">
         <div>
-          <p class="page-intro-kicker font-display italic">{{ data_get($intro, 'kicker', 'Sözleşmeler') }}</p>
+          <p class="page-intro-kicker font-display italic">{{ data_get($intro, 'kicker', __t('footer_contracts', 'Sözleşmeler', 'frontend')) }}</p>
           <h1>{{ data_get($intro, 'title') ?: data_get($page, 'title') }}</h1>
         </div>
         <div class="page-intro-aside">
@@ -32,8 +32,8 @@
 
   <section class="legal-section">
     <div class="legal-shell mx-auto max-w-site px-5 md:px-8">
-      <nav class="legal-nav" aria-label="Sözleşme sayfaları">
-        <p class="legal-nav-label">Sözleşmeler</p>
+      <nav class="legal-nav" aria-label="{{ __t('ui_legal_nav', 'Sözleşme sayfaları', 'frontend') }}">
+        <p class="legal-nav-label">{{ data_get($intro, 'kicker', __t('footer_contracts', 'Sözleşmeler', 'frontend')) }}</p>
         @foreach ($nav as $item)
           @php
             $type = data_get($item, 'type');

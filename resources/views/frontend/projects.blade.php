@@ -44,7 +44,7 @@
           </div>
           <span class="plp-rule" aria-hidden="true"></span>
           <label class="plp-city">
-            <select id="project-city" aria-label="Şehir">
+            <select id="project-city" aria-label="{{ __t('ui_city', 'Şehir', 'frontend') }}">
               <option value="all">{{ data_get($filter, 'all_cities', 'Tüm şehirler') }}</option>
               @foreach ($cities as $city)
                 <option value="{{ data_get($city, 'id') }}">{{ data_get($city, 'label') }}</option>

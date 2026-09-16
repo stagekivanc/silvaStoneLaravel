@@ -132,16 +132,53 @@ class Project extends Model
             'place' => $this->place,
             'city' => $this->city,
             'cityLabel' => $this->cityLabel(),
-            'product' => $this->product_name,
+            'product' => $this->localizedProductName($lang, $translation),
             'year' => $this->year,
             'area' => $this->area,
             'img' => $gallery[0] ?? ($this->image_url ?: ''),
             'imgs' => $gallery,
             'lead' => $translation?->lead ?: '',
             'body' => $translation?->body ?: '',
-            'feats' => $this->featureList(),
+            'feats' => $this->localizedFeats($translation),
             'url' => $this->detailUrl($lang),
         ];
+    }
+
+    protected function localizedProductName(string $lang, $translation = null): string
+    {
+        $base = (string) ($this->product_name ?: '');
+        if (! str_starts_with(strtolower($lang), 'en')) {
+            return $base;
+        }
+
+        $en = \App\Support\SilvaProjectsDefaults::englishBySlug()[$this->slug] ?? null;
+        if (! empty($en['product_name'])) {
+            return (string) $en['product_name'];
+        }
+
+        return \App\Support\SilvaProjectsDefaults::englishProductName($base);
+    }
+
+    protected function localizedFeats($translation = null): array
+    {
+        $feats = $translation?->feats;
+        if (is_array($feats) && $feats !== []) {
+            $items = [];
+            foreach ($feats as $item) {
+                if (is_string($item) && trim($item) !== '') {
+                    $items[] = trim($item);
+                } elseif (is_array($item)) {
+                    $text = trim((string) ($item['title'] ?? $item['text'] ?? $item['value'] ?? ''));
+                    if ($text !== '') {
+                        $items[] = $text;
+                    }
+                }
+            }
+
+            return array_values(array_unique($items));
+        }
+
+        return $this->featureList();
     }
 
     public static function mediaUrl(?string $path): string

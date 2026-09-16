@@ -75,33 +75,42 @@ class SilvaLegalDefaults
         return array_keys(self::types());
     }
 
-    public static function data(?string $type = 'privacy-policy'): array
+    public static function data(?string $type = 'privacy-policy', ?string $lang = null): array
     {
+        $lang = $lang ?? app()->getLocale() ?? 'tr';
+        $isEn = str_starts_with(strtolower((string) $lang), 'en');
         $meta = self::types()[$type] ?? self::types()['privacy-policy'];
+        $name = $isEn
+            ? ($meta['name_en'] ?? $meta['name'])
+            : $meta['name'];
 
         return [
             'intro' => [
-                'kicker' => 'Sözleşmeler',
-                'title' => $meta['name'],
-                'aside' => 'Acarkon Entegre Ağaç San. ve Tic. A.Ş. veri sorumlusu sıfatıyla yayımlanan yasal metin.',
+                'kicker' => $isEn ? 'Contracts' : 'Sözleşmeler',
+                'title' => $name,
+                'aside' => $isEn
+                    ? 'Legal text published by Acarkon Entegre Ağaç San. ve Tic. A.Ş. in its capacity as data controller.'
+                    : 'Acarkon Entegre Ağaç San. ve Tic. A.Ş. veri sorumlusu sıfatıyla yayımlanan yasal metin.',
             ],
             'doc' => [
                 'number' => $meta['number'],
-                'title' => $meta['name'],
+                'title' => $name,
             ],
-            'body_html' => self::loadBody($meta['file']),
-            'nav' => self::navItems(),
+            'body_html' => self::loadBody($meta['file'], $isEn),
+            'nav' => self::navItems($isEn),
         ];
     }
 
-    public static function navItems(): array
+    public static function navItems(bool $english = false): array
     {
         $items = [];
         foreach (self::types() as $type => $meta) {
             $items[] = [
                 'type' => $type,
                 'number' => $meta['number'],
-                'label' => $meta['name'],
+                'label' => $english
+                    ? ($meta['name_en'] ?? $meta['name'])
+                    : $meta['name'],
             ];
         }
 
@@ -122,11 +131,20 @@ class SilvaLegalDefaults
         return str_replace(array_keys($map), array_values($map), $html);
     }
 
-    protected static function loadBody(string $file): string
+    protected static function loadBody(string $file, bool $english = false): string
     {
+        if ($english) {
+            $enPath = resource_path('content/legal/en/' . $file);
+            if (is_file($enPath)) {
+                return (string) file_get_contents($enPath);
+            }
+        }
+
         $path = resource_path('content/legal/' . $file);
-        if (!is_file($path)) {
-            return '<p>İçerik henüz eklenmedi.</p>';
+        if (! is_file($path)) {
+            return $english
+                ? '<p>Content is not available yet.</p>'
+                : '<p>İçerik henüz eklenmedi.</p>';
         }
 
         return (string) file_get_contents($path);

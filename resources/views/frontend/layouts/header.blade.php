@@ -14,35 +14,35 @@
   <div class="header-bar relative mx-auto grid max-w-[1440px] grid-cols-3 items-center px-4 py-4 md:px-8 md:py-5">
     <div class="menu-wrap relative justify-self-start">
       <button type="button" id="menu-toggle" class="pill-btn group inline-flex items-center gap-2 rounded-full px-5 py-3 text-[14px] font-medium md:px-6 md:text-[15px]" aria-expanded="false" aria-controls="nav-dropdown">
-        <span>Menu</span>
+        <span>{{ __t('nav_menu', 'Menu', 'frontend') }}</span>
         <i class="bx bx-grid-alt text-[17px] transition duration-300" id="menu-toggle-icon"></i>
-                </button>
+      </button>
 
       <div id="nav-dropdown" class="nav-dropdown" aria-hidden="true">
         <div class="nav-drop-head">
-          <span>Menu</span>
-          <button type="button" class="nav-drop-close" aria-label="Kapat">
+          <span>{{ __t('nav_menu', 'Menu', 'frontend') }}</span>
+          <button type="button" class="nav-drop-close" aria-label="{{ __t('nav_close', 'Kapat', 'frontend') }}">
             <i class="bx bx-x"></i>
-                    </button>
+          </button>
         </div>
         <nav class="nav-dropdown-inner">
-          <a href="{{ $homeUrl }}#neden" class="nav-drop-link">Özellikler</a>
-          <a href="{{ $productsUrl }}" class="nav-drop-link">Koleksiyon</a>
-          <a href="{{ $storesUrl }}" class="nav-drop-link">Showroom</a>
-          <a href="{{ $projectsUrl }}" class="nav-drop-link">Projeler</a>
-          <a href="{{ $contactUrl }}" class="nav-drop-link">İletişim</a>
-          <a href="{{ $catalogUrl }}" target="_blank" rel="noopener" class="nav-drop-link nav-drop-link--muted">Online katalog</a>
+          <a href="{{ $homeUrl }}#neden" class="nav-drop-link">{{ __t('nav_features', 'Özellikler', 'frontend') }}</a>
+          <a href="{{ $productsUrl }}" class="nav-drop-link">{{ __t('nav_collection', 'Koleksiyon', 'frontend') }}</a>
+          <a href="{{ $storesUrl }}" class="nav-drop-link">{{ __t('nav_showroom', 'Showroom', 'frontend') }}</a>
+          <a href="{{ $projectsUrl }}" class="nav-drop-link">{{ __t('nav_projects', 'Projeler', 'frontend') }}</a>
+          <a href="{{ $contactUrl }}" class="nav-drop-link">{{ __t('nav_contact', 'İletişim', 'frontend') }}</a>
+          <a href="{{ $catalogUrl }}" target="_blank" rel="noopener" class="nav-drop-link nav-drop-link--muted">{{ __t('nav_catalog', 'Online katalog', 'frontend') }}</a>
           <div class="nav-drop-mobile">
-            <p class="nav-drop-label">Dil</p>
-            <div class="nav-drop-langs" role="group" aria-label="Dil">
+            <p class="nav-drop-label">{{ __t('nav_lang', 'Dil', 'frontend') }}</p>
+            <div class="nav-drop-langs" role="group" aria-label="{{ __t('nav_lang', 'Dil', 'frontend') }}">
               <a href="{{ route('home', ['lang' => 'tr']) }}" class="lang-btn {{ $lang === 'tr' ? 'is-active' : '' }}" data-lang="tr">TR</a>
               <a href="{{ route('home', ['lang' => 'en']) }}" class="lang-btn {{ $lang === 'en' ? 'is-active' : '' }}" data-lang="en">EN</a>
             </div>
-            <a href="{{ $contactUrl }}" class="nav-drop-cta">Teklif Al</a>
+            <a href="{{ $contactUrl }}" class="nav-drop-cta">{{ __t('nav_quote', 'Teklif Al', 'frontend') }}</a>
             <a href="tel:{{ $phoneRaw }}" class="nav-drop-phone">{{ $phoneLabel }}</a>
-                </div>
-</nav>
-        </div>
+          </div>
+        </nav>
+      </div>
     </div>
 
     <a href="{{ $homeUrl }}" class="header-brand justify-self-center flex flex-col items-center leading-none">
@@ -51,14 +51,14 @@
     </a>
 
     <div class="header-actions flex items-center justify-self-end gap-2 md:gap-2.5">
-      <div class="pill-btn header-lang flex overflow-hidden rounded-full text-[13px] font-medium tracking-wide md:text-[14px]" role="group" aria-label="Dil">
+      <div class="pill-btn header-lang flex overflow-hidden rounded-full text-[13px] font-medium tracking-wide md:text-[14px]" role="group" aria-label="{{ __t('nav_lang', 'Dil', 'frontend') }}">
         <a href="{{ route('home', ['lang' => 'tr']) }}" class="lang-btn {{ $lang === 'tr' ? 'is-active' : '' }} px-3 py-3 md:px-4" data-lang="tr">TR</a>
         <a href="{{ route('home', ['lang' => 'en']) }}" class="lang-btn {{ $lang === 'en' ? 'is-active' : '' }} px-3 py-3 md:px-4" data-lang="en">EN</a>
-            </div>
+      </div>
       <a href="{{ $contactUrl }}" class="pill-btn header-cta inline-flex items-center gap-1.5 rounded-full px-4 py-3 text-[13px] font-medium md:gap-2 md:px-6 md:text-[15px]">
-        <span class="header-cta-text">Teklif Al</span>
+        <span class="header-cta-text">{{ __t('nav_quote', 'Teklif Al', 'frontend') }}</span>
         <i class="bx bx-plus text-[17px]"></i>
       </a>
     </div>
-</div>
+  </div>
 </header>

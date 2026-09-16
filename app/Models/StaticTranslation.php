@@ -17,15 +17,10 @@ class StaticTranslation extends Model
             ->first();
 
         if (!$translation) {
-            $languages = Language::active();
-            $seedValue = $default !== '' ? $default : $key;
-            foreach ($languages as $l) {
-                self::firstOrCreate(
-                    ['lang_key' => $l->code, 'group' => $group, 'key' => $key],
-                    ['value' => $seedValue]
-                );
-            }
-            return $seedValue;
+            return self::firstOrCreate(
+                ['lang_key' => $lang, 'group' => $group, 'key' => $key],
+                ['value' => $default !== '' ? $default : $key]
+            )->value ?: ($default !== '' ? $default : $key);
         }
 
         $value = trim((string) ($translation->value ?? ''));

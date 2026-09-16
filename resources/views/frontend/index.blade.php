@@ -57,10 +57,10 @@
         <div class="hero-spotlight-top">
           <p>{{ data_get($hero, 'spotlight_label', 'Yeni ürünler') }}</p>
           <div class="hero-spotlight-nav">
-            <button type="button" class="hero-spotlight-btn" id="hero-prod-prev" aria-label="Önceki ürün">
+            <button type="button" class="hero-spotlight-btn" id="hero-prod-prev" aria-label="{{ __t('ui_prev_product', 'Önceki ürün', 'frontend') }}">
               <i class="bx bx-chevron-left"></i>
             </button>
-            <button type="button" class="hero-spotlight-btn" id="hero-prod-next" aria-label="Sonraki ürün">
+            <button type="button" class="hero-spotlight-btn" id="hero-prod-next" aria-label="{{ __t('ui_next_product', 'Sonraki ürün', 'frontend') }}">
               <i class="bx bx-chevron-right"></i>
             </button>
           </div>
@@ -171,7 +171,7 @@
         </a>
       </div>
     </div>
-    <div class="store-marquee store-marquee--cities mt-10" aria-label="Showroom şehirleri">
+    <div class="store-marquee store-marquee--cities mt-10" aria-label="{{ __t('ui_showroom_cities', 'Showroom cities', 'frontend') }}">
       <div class="store-marquee-row" data-store-rail="ltr"></div>
       <div class="store-marquee-row store-marquee-row--rtl" data-store-rail="rtl"></div>
     </div>
@@ -194,10 +194,10 @@
     <div class="mx-auto mt-6 flex max-w-site items-center justify-between gap-4 px-5 md:px-8">
       <p class="text-[12px] font-light text-stone">{{ data_get($projects, 'hint') }}</p>
       <div class="flex gap-2">
-        <button type="button" class="project-nav-btn" id="projects-prev" aria-label="Önceki">
+        <button type="button" class="project-nav-btn" id="projects-prev" aria-label="{{ __t('ui_prev', 'Önceki', 'frontend') }}">
           <i class="bx bx-left-arrow-alt"></i>
         </button>
-        <button type="button" class="project-nav-btn" id="projects-next" aria-label="Sonraki">
+        <button type="button" class="project-nav-btn" id="projects-next" aria-label="{{ __t('ui_next', 'Sonraki', 'frontend') }}">
           <i class="bx bx-right-arrow-alt"></i>
         </button>
       </div>
@@ -281,7 +281,7 @@
       ->values();
   @endphp
   <script>
-    window.SILVA_CATS = @json(array_merge(['all' => 'Tümü'], \App\Models\ProductCategory::query()->where('status', true)->orderBy('order')->get()->mapWithKeys(fn ($c) => [$c->slug => $c->name])->all()));
+    window.SILVA_CATS = @json(array_merge(['all' => __t('ui_all', 'Tümü', 'frontend')], \App\Models\ProductCategory::query()->where('status', true)->orderBy('order')->get()->mapWithKeys(fn ($c) => [$c->slug => $c->name])->all()));
     window.SILVA_COLORS = @json(\App\Models\ProductColor::filterMap());
     window.SILVA_PRODUCTS = @json($homeProducts);
     window.SILVA_HOME_FEATURED = @json($homeProducts->pluck('code')->values());

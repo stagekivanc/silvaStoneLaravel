@@ -60,7 +60,7 @@
           <div class="plp-filter-sheet" id="product-filter-sheet" aria-hidden="true">
             <div class="plp-filter-sheet-bar">
               <p>{{ data_get($filter, 'filter_title', 'Filtrele') }}</p>
-              <button type="button" class="plp-filter-close" id="product-filter-close" aria-label="Kapat">
+              <button type="button" class="plp-filter-close" id="product-filter-close" aria-label="{{ __t('ui_close', 'Kapat', 'frontend') }}">
                 <i class="bx bx-x"></i>
               </button>
             </div>
@@ -87,11 +87,11 @@
           <div class="plp-toolbar-end">
             <p id="product-count" class="plp-count"></p>
             <button type="button" class="plp-reset" id="product-reset">{{ data_get($filter, 'reset', 'Sıfırla') }}</button>
-            <div class="plp-seg plp-views" role="group" aria-label="Gösterim">
-              <button type="button" data-cols="1" aria-label="Liste" title="Liste">1</button>
-              <button type="button" data-cols="2" aria-label="2’li ızgara" title="2’li">2</button>
-              <button type="button" data-cols="3" aria-label="3’lü ızgara" title="3’lü">3</button>
-              <button type="button" data-cols="4" aria-label="4’lü ızgara" title="4’lü">4</button>
+            <div class="plp-seg plp-views" role="group" aria-label="{{ __t('ui_display', 'Gösterim', 'frontend') }}">
+              <button type="button" data-cols="1" aria-label="{{ __t('ui_list_view', 'Liste', 'frontend') }}" title="{{ __t('ui_list_view', 'Liste', 'frontend') }}">1</button>
+              <button type="button" data-cols="2" aria-label="{{ __t('ui_grid_view', 'Izgara', 'frontend') }} 2" title="2">2</button>
+              <button type="button" data-cols="3" aria-label="{{ __t('ui_grid_view', 'Izgara', 'frontend') }} 3" title="3">3</button>
+              <button type="button" data-cols="4" aria-label="{{ __t('ui_grid_view', 'Izgara', 'frontend') }} 4" title="4">4</button>
             </div>
           </div>
         </div>
@@ -106,7 +106,7 @@
         <p>{{ data_get($filter, 'empty', 'Bu seçime uygun ürün yok.') }}</p>
         <button type="button" class="plp-empty-btn" id="product-empty-reset">{{ data_get($filter, 'empty_reset', 'Filtrelemeyi sıfırla') }}</button>
       </div>
-      <nav class="plp-pager" id="product-pager" aria-label="Sayfalar" hidden></nav>
+      <nav class="plp-pager" id="product-pager" aria-label="{{ __t('ui_pages', 'Sayfalar', 'frontend') }}" hidden></nav>
     </div>
   </section>
 

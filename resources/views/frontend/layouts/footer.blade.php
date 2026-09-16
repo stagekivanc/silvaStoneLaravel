@@ -11,9 +11,9 @@
   $email = \App\Models\Setting::get('email', 'bilgi@acarkon.com');
   $address = \App\Models\Setting::get('address', 'Horozluhan Mahallesi Hotamış Sk. No:49 Selçuklu / Konya');
   $wa = preg_replace('/\D+/', '', \App\Models\Setting::get('whatsapp', '908503460226'));
-  $ctaTitle = \App\Models\Setting::get('footer_cta_title', 'Mekânınız için doğru yüzeyi seçin');
-  $ctaText = \App\Models\Setting::get('footer_cta_text', 'Katalogu inceleyin veya en yakın Acarkon Store’dan numune alın.');
-  $brandText = \App\Models\Setting::get('footer_brand_text', 'Silva Stone, Acarkon Orman Ürünleri ürün ailesinin dekoratif taş duvar paneli markasıdır.');
+  $ctaTitle = __t('footer_cta_title', 'Mekânınız için doğru yüzeyi seçin', 'frontend');
+  $ctaText = __t('footer_cta_text', 'Katalogu inceleyin veya en yakın Acarkon Store’dan numune alın.', 'frontend');
+  $brandText = __t('footer_brand_text', 'Silva Stone, Acarkon Orman Ürünleri ürün ailesinin dekoratif taş duvar paneli markasıdır.', 'frontend');
 @endphp
 
 <footer class="site-footer bg-void text-white/55">
@@ -26,15 +26,15 @@
       <div class="site-footer-cta flex flex-wrap gap-3">
         <a href="{{ $catalogUrl }}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-[13px] font-medium text-ink transition hover:bg-mist">
           <i class="bx bx-book-open text-base"></i>
-          <span>Online katalog</span>
+          <span>{{ __t('nav_catalog', 'Online katalog', 'frontend') }}</span>
         </a>
         <a href="{{ $storesUrl }}" class="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-3 text-[13px] font-medium text-white transition hover:border-white/40 hover:bg-white/5">
           <i class="bx bx-map text-base"></i>
-          <span>Showroom</span>
+          <span>{{ __t('nav_showroom', 'Showroom', 'frontend') }}</span>
         </a>
         <a href="{{ $contactUrl }}" class="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-3 text-[13px] font-medium text-white transition hover:border-white/40 hover:bg-white/5">
           <i class="bx bx-envelope text-base"></i>
-          <span>İletişim</span>
+          <span>{{ __t('nav_contact', 'İletişim', 'frontend') }}</span>
         </a>
       </div>
     </div>
@@ -67,35 +67,35 @@
         <div>
           <p class="text-[11px] font-medium uppercase tracking-[0.16em] text-white">Silva Stone</p>
           <ul class="mt-4 space-y-2.5 text-sm font-light">
-            <li><a href="{{ $homeUrl }}#neden" class="transition hover:text-white">Özellikler</a></li>
-            <li><a href="{{ $productsUrl }}" class="transition hover:text-white">Koleksiyon</a></li>
-            <li><a href="{{ $homeUrl }}#alanlar" class="transition hover:text-white">Mekânlar</a></li>
-            <li><a href="{{ $catalogUrl }}" target="_blank" rel="noopener" class="transition hover:text-white">Online katalog</a></li>
-            <li><a href="{{ $projectsUrl }}" class="transition hover:text-white">Projeler</a></li>
+            <li><a href="{{ $homeUrl }}#neden" class="transition hover:text-white">{{ __t('nav_features', 'Özellikler', 'frontend') }}</a></li>
+            <li><a href="{{ $productsUrl }}" class="transition hover:text-white">{{ __t('nav_collection', 'Koleksiyon', 'frontend') }}</a></li>
+            <li><a href="{{ $homeUrl }}#alanlar" class="transition hover:text-white">{{ __t('nav_spaces', 'Mekânlar', 'frontend') }}</a></li>
+            <li><a href="{{ $catalogUrl }}" target="_blank" rel="noopener" class="transition hover:text-white">{{ __t('nav_catalog', 'Online katalog', 'frontend') }}</a></li>
+            <li><a href="{{ $projectsUrl }}" class="transition hover:text-white">{{ __t('nav_projects', 'Projeler', 'frontend') }}</a></li>
           </ul>
         </div>
         <div>
-          <p class="text-[11px] font-medium uppercase tracking-[0.16em] text-white">Satış</p>
+          <p class="text-[11px] font-medium uppercase tracking-[0.16em] text-white">{{ __t('footer_sales', 'Satış', 'frontend') }}</p>
           <ul class="mt-4 space-y-2.5 text-sm font-light">
-            <li><a href="{{ $storesUrl }}" class="transition hover:text-white">Showroom</a></li>
-            <li><a href="https://acarkon.com/tr/pages/satis-noktalari" target="_blank" rel="noopener" class="transition hover:text-white">Acarkon Store</a></li>
-            <li><a href="https://acarkon.com/tr/pages/bayi-basvuru" target="_blank" rel="noopener" class="transition hover:text-white">Bayi Ol</a></li>
-            <li><a href="{{ $contactUrl }}" class="transition hover:text-white">İletişim</a></li>
+            <li><a href="{{ $storesUrl }}" class="transition hover:text-white">{{ __t('nav_showroom', 'Showroom', 'frontend') }}</a></li>
+            <li><a href="https://acarkon.com/{{ $lang }}/pages/satis-noktalari" target="_blank" rel="noopener" class="transition hover:text-white">{{ __t('footer_stores_acarkon', 'Acarkon Store', 'frontend') }}</a></li>
+            <li><a href="https://acarkon.com/{{ $lang }}/pages/bayi-basvuru" target="_blank" rel="noopener" class="transition hover:text-white">{{ __t('footer_dealer', 'Bayi Ol', 'frontend') }}</a></li>
+            <li><a href="{{ $contactUrl }}" class="transition hover:text-white">{{ __t('nav_contact', 'İletişim', 'frontend') }}</a></li>
           </ul>
         </div>
         <div>
-          <p class="text-[11px] font-medium uppercase tracking-[0.16em] text-white">Kurumsal</p>
+          <p class="text-[11px] font-medium uppercase tracking-[0.16em] text-white">{{ __t('footer_corporate', 'Kurumsal', 'frontend') }}</p>
           <ul class="mt-4 space-y-2.5 text-sm font-light">
-            <li><a href="https://acarkon.com/tr/pages/hakkimizda" target="_blank" rel="noopener" class="transition hover:text-white">Hakkımızda</a></li>
-            <li><a href="https://acarkon.com/tr/pages/markalar" target="_blank" rel="noopener" class="transition hover:text-white">Markalar</a></li>
-            <li><a href="{{ m_url('contracts') }}" class="transition hover:text-white">Sözleşmeler</a></li>
+            <li><a href="https://acarkon.com/{{ $lang }}/pages/hakkimizda" target="_blank" rel="noopener" class="transition hover:text-white">{{ __t('footer_about', 'Hakkımızda', 'frontend') }}</a></li>
+            <li><a href="https://acarkon.com/{{ $lang }}/pages/markalar" target="_blank" rel="noopener" class="transition hover:text-white">{{ __t('footer_brands', 'Markalar', 'frontend') }}</a></li>
+            <li><a href="{{ m_url('contracts') }}" class="transition hover:text-white">{{ __t('footer_contracts', 'Sözleşmeler', 'frontend') }}</a></li>
             <li><a href="https://acarkon.com" target="_blank" rel="noopener" class="transition hover:text-white">acarkon.com</a></li>
           </ul>
         </div>
       </div>
 
       <div class="site-footer-contact lg:col-span-3">
-        <p class="text-[11px] font-medium uppercase tracking-[0.16em] text-white">İletişim</p>
+        <p class="text-[11px] font-medium uppercase tracking-[0.16em] text-white">{{ __t('footer_contact', 'İletişim', 'frontend') }}</p>
         <ul class="mt-4 space-y-4 text-sm font-light">
           <li class="flex gap-3">
             <i class="bx bx-map mt-0.5 text-base text-white/40"></i>
@@ -116,11 +116,11 @@
     <div class="site-footer-legal flex flex-col gap-5 py-7 md:flex-row md:items-center md:justify-between">
       <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-5">
         <p class="text-xs font-light">© <span id="year">{{ date('Y') }}</span> {{ \App\Models\Setting::get('company_name', 'Acarkon Orman Ürünleri') }} · Silva Stone</p>
-          <div class="flex flex-wrap gap-4 text-xs font-light">
-            <a href="{{ m_url('privacy-policy') }}" class="transition hover:text-white">Gizlilik</a>
-            <a href="{{ m_url('cookie-policy') }}" class="transition hover:text-white">Çerezler</a>
-            <a href="{{ m_url('kvkk') }}" class="transition hover:text-white">KVKK</a>
-          </div>
+        <div class="flex flex-wrap gap-4 text-xs font-light">
+          <a href="{{ m_url('privacy-policy') }}" class="transition hover:text-white">{{ __t('footer_privacy', 'Gizlilik', 'frontend') }}</a>
+          <a href="{{ m_url('cookie-policy') }}" class="transition hover:text-white">{{ __t('footer_cookies', 'Çerezler', 'frontend') }}</a>
+          <a href="{{ m_url('kvkk') }}" class="transition hover:text-white">{{ __t('footer_kvkk', 'KVKK', 'frontend') }}</a>
+        </div>
       </div>
       <a href="https://stagedijital.com" target="_blank" rel="noopener" class="inline-flex items-center gap-3 text-xs font-light transition hover:text-white">
         <img src="{{ silva_asset('assets/stage-logo.svg') }}" alt="Stage Dijital" class="stage-logo h-5 w-auto" />

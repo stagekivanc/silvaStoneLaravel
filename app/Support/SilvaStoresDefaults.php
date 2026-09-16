@@ -2,9 +2,13 @@
 
 namespace App\Support;
 
+use App\Support\Concerns\HasLocalizedDefaults;
+
 class SilvaStoresDefaults
 {
-    public static function data(): array
+    use HasLocalizedDefaults;
+
+    protected static function baseData(): array
     {
         return [
             'intro' => [

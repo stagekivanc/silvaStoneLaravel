@@ -49,7 +49,7 @@ class SilvaHomepageSeeder extends Seeder
                 'seo_title' => 'Silva Stone | Acarkon Decorative Stone Wall Panels',
                 'seo_description' => 'Silva Stone by Acarkon — decorative stone wall panels for modern interiors. Travertine, slate, brick and concrete looks with fast install.',
                 'seo_keywords' => 'Silva Stone, Acarkon, decorative stone, wall panel, travertine panel',
-                'extras' => $defaults,
+                'extras' => SilvaHomepageDefaults::data('en'),
             ]
         );
 

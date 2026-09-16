@@ -12,7 +12,8 @@ class SilvaLegalPagesSeeder extends Seeder
     public function run(): void
     {
         foreach (SilvaLegalDefaults::types() as $type => $meta) {
-            $defaults = SilvaLegalDefaults::data($type);
+            $defaultsTr = SilvaLegalDefaults::data($type, 'tr');
+            $defaultsEn = SilvaLegalDefaults::data($type, 'en');
 
             $page = Page::updateOrCreate(
                 ['type' => $type],
@@ -22,8 +23,8 @@ class SilvaLegalPagesSeeder extends Seeder
                     'title' => $meta['name'],
                     'seo_title' => $meta['seo_title'],
                     'seo_description' => $meta['seo_description'],
-                    'body_content' => $defaults['body_html'],
-                    'extras' => $defaults,
+                    'body_content' => $defaultsTr['body_html'],
+                    'extras' => $defaultsTr,
                 ]
             );
 
@@ -35,8 +36,8 @@ class SilvaLegalPagesSeeder extends Seeder
                     'title' => $meta['name'],
                     'seo_title' => $meta['seo_title'],
                     'seo_description' => $meta['seo_description'],
-                    'body_content' => $defaults['body_html'],
-                    'extras' => $defaults,
+                    'body_content' => $defaultsTr['body_html'],
+                    'extras' => $defaultsTr,
                 ]
             );
 
@@ -47,9 +48,9 @@ class SilvaLegalPagesSeeder extends Seeder
                     'name' => $meta['name_en'],
                     'title' => $meta['name_en'],
                     'seo_title' => $meta['name_en'] . ' | Silva Stone',
-                    'seo_description' => $meta['seo_description'],
-                    'body_content' => $defaults['body_html'],
-                    'extras' => $defaults,
+                    'seo_description' => 'Silva Stone ' . strtolower($meta['name_en']) . '.',
+                    'body_content' => $defaultsEn['body_html'],
+                    'extras' => $defaultsEn,
                 ]
             );
         }

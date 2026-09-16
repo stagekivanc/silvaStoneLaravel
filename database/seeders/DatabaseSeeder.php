@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             SilvaStoresSeeder::class,
             SilvaProjectsSeeder::class,
             SilvaProductsSeeder::class,
+            SilvaEnglishContentSeeder::class,
         ]);
     }
 }

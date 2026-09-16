@@ -45,7 +45,7 @@
           <p>{{ data_get($intro, 'aside') }}</p>
         </div>
       </div>
-      <div class="page-intro-media store-map" id="store-map" role="region" aria-label="Showroom konum haritası"></div>
+      <div class="page-intro-media store-map" id="store-map" role="region" aria-label="{{ __t('ui_map_label', 'Showroom konum haritası', 'frontend') }}"></div>
     </div>
   </section>
 
@@ -97,7 +97,7 @@
               @if ($maps !== '')
                 <a href="https://www.google.com/maps/dir/?api=1&destination={{ $maps }}" target="_blank" rel="noopener" class="store-card-link store-card-link--map">
                   <i class="bx bx-map-alt"></i>
-                  <span>Yol tarifi al</span>
+                  <span>{{ __t('ui_directions', 'Yol tarifi al', 'frontend') }}</span>
                 </a>
               @endif
             </div>
