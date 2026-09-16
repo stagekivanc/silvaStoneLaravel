@@ -72,11 +72,15 @@
 @endsection
 
 @push('scripts')
+  @php
+    $jsProjects = $projectItems->values();
+    $jsProjectsUrl = m_url('projects');
+  @endphp
   <script>
     window.SILVA_PROJECT_PLACES = @json($places);
     window.SILVA_PROJECT_TYPES = @json($types);
-    window.SILVA_PROJECTS = @json($projectItems->values());
-    window.SILVA_PROJECTS_URL = @json(m_url('projects'));
+    window.SILVA_PROJECTS = @json($jsProjects);
+    window.SILVA_PROJECTS_URL = @json($jsProjectsUrl);
     window.silvaProjectHref = function (p) {
       return p.url || (window.SILVA_PROJECTS_URL + '/' + encodeURIComponent(p.slug || p.id));
     };

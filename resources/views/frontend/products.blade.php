@@ -127,11 +127,15 @@
 @endsection
 
 @push('scripts')
+  @php
+    $jsProducts = $productItems->values();
+    $jsProductsUrl = m_url('products');
+  @endphp
   <script>
     window.SILVA_CATS = @json($cats);
     window.SILVA_COLORS = @json($colors);
-    window.SILVA_PRODUCTS = @json($productItems->values());
-    window.SILVA_PRODUCTS_URL = @json(m_url('products'));
+    window.SILVA_PRODUCTS = @json($jsProducts);
+    window.SILVA_PRODUCTS_URL = @json($jsProductsUrl);
     window.SILVA_FEATURES = @json($featuresForJs);
     window.SILVA_LABELS = @json($silvaLabels);
   </script>

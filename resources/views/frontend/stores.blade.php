@@ -109,9 +109,12 @@
 @endsection
 
 @push('scripts')
+  @php
+    $jsStoresUrl = m_url('stores');
+  @endphp
   <script>
     window.SILVA_STORES = @json($storesForJs);
-    window.SILVA_STORES_URL = @json(m_url('stores'));
+    window.SILVA_STORES_URL = @json($jsStoresUrl);
   </script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="{{ silva_asset('js/cart.js') }}"></script>

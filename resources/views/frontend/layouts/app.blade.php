@@ -78,7 +78,8 @@
     };
   </script>
   <link rel="stylesheet" href="{{ silva_asset('css/styles.css') }}" />
-  <script>window.SILVA_BASE = @json(rtrim(silva_asset(), '/'));</script>
+  @php($silvaBase = rtrim(silva_asset(), '/'))
+  <script>window.SILVA_BASE = @json($silvaBase);</script>
   @stack('head')
 </head>
 <body class="text-ink font-sans antialiased overflow-x-hidden @yield('body_class', 'bg-white')" @yield('body_attrs')>
