@@ -206,37 +206,17 @@
 @endsection
 
 @push('scripts')
-  <script src="{{ silva_asset('js/products.js') }}"></script>
-  <script>
-    (function () {
-      const base = (window.SILVA_BASE || '').replace(/\/$/, '') + '/';
-      const fix = (p) => {
-        if (!p || /^https?:\/\//i.test(p) || p.startsWith('/') || p.startsWith('data:')) return p;
-        return base + p.replace(/^\.\//, '');
-      };
-      (window.SILVA_PRODUCTS || []).forEach((p) => {
-        p.img = fix(p.img);
-        p.imgHover = fix(p.imgHover);
-        p.imgs = (p.imgs || []).map(fix);
-        if (p.url && !/^https?:\/\//i.test(p.url)) p.url = fix(p.url);
-      });
-      window.silvaHref = (p) => base + 'urun.html?code=' + encodeURIComponent(p.code);
-
-      @php
-        $jsSlides = $slides->map(function ($s) {
-          return [
-            'img' => homepage_media_url(data_get($s, 'image')),
-            'kicker' => data_get($s, 'kicker'),
-            'title' => data_get($s, 'title'),
-            'lead' => data_get($s, 'lead'),
-            'tone' => data_get($s, 'tone', 'dark'),
-          ];
-        })->values();
-      @endphp
-      window.SILVA_HERO_SLIDES = @json($jsSlides);
-    })();
-  </script>
   @php
+    $jsSlides = $slides->map(function ($s) {
+      return [
+        'img' => homepage_media_url(data_get($s, 'image')),
+        'kicker' => data_get($s, 'kicker'),
+        'title' => data_get($s, 'title'),
+        'lead' => data_get($s, 'lead'),
+        'tone' => data_get($s, 'tone', 'dark'),
+      ];
+    })->values();
+
     $homeProjects = \App\Models\Project::query()
       ->where('status', true)
       ->where('home_status', true)
@@ -245,8 +225,11 @@
       ->orderBy('id')
       ->limit(6)
       ->get()
-      ->map(fn ($p) => $p->toFrontendArray())
+      ->map(function ($p) {
+        return $p->toFrontendArray();
+      })
       ->values();
+
     if ($homeProjects->isEmpty()) {
       $homeProjects = \App\Models\Project::query()
         ->where('status', true)
@@ -255,20 +238,12 @@
         ->orderBy('id')
         ->limit(6)
         ->get()
-        ->map(fn ($p) => $p->toFrontendArray())
+        ->map(function ($p) {
+          return $p->toFrontendArray();
+        })
         ->values();
     }
-  @endphp
-  <script>
-    window.SILVA_PROJECT_PLACES = @json(\App\Support\SilvaProjectsDefaults::places());
-    window.SILVA_PROJECT_TYPES = @json(\App\Support\SilvaProjectsDefaults::types());
-    window.SILVA_PROJECTS = @json($homeProjects);
-    window.SILVA_PROJECTS_URL = @json(m_url('projects'));
-    window.silvaProjectHref = function (p) {
-      return p.url || (window.SILVA_PROJECTS_URL + '/' + encodeURIComponent(p.slug || p.id));
-    };
-  </script>
-  @php
+
     $homeProducts = \App\Models\Product::query()
       ->where('status', true)
       ->where('home_status', true)
@@ -277,24 +252,53 @@
       ->orderBy('id')
       ->limit(8)
       ->get()
-      ->map(fn ($p) => $p->toFrontendArray())
+      ->map(function ($p) {
+        return $p->toFrontendArray();
+      })
       ->values();
-    $homeCats = array_merge(
-      ['all' => __t('ui_all', 'Tümü', 'frontend')],
-      \App\Models\ProductCategory::query()
-        ->where('status', true)
-        ->orderBy('order')
-        ->get()
-        ->mapWithKeys(fn ($c) => [$c->slug => $c->name])
-        ->all()
-    );
+
+    $homeCatMap = [];
+    foreach (\App\Models\ProductCategory::query()->where('status', true)->orderBy('order')->get() as $category) {
+      $homeCatMap[$category->slug] = $category->name;
+    }
+    $homeCats = array_merge(['all' => __t('ui_all', 'Tümü', 'frontend')], $homeCatMap);
+    $homeProductCodes = $homeProducts->pluck('code')->values();
+    $homeColorMap = \App\Models\ProductColor::filterMap();
+    $homeProjectPlaces = \App\Support\SilvaProjectsDefaults::places();
+    $homeProjectTypes = \App\Support\SilvaProjectsDefaults::types();
+    $homeProjectsUrl = m_url('projects');
+    $homeProductsUrl = m_url('products');
   @endphp
   <script>
+    window.SILVA_HERO_SLIDES = @json($jsSlides);
+    window.SILVA_PROJECT_PLACES = @json($homeProjectPlaces);
+    window.SILVA_PROJECT_TYPES = @json($homeProjectTypes);
+    window.SILVA_PROJECTS = @json($homeProjects);
+    window.SILVA_PROJECTS_URL = @json($homeProjectsUrl);
     window.SILVA_CATS = @json($homeCats);
-    window.SILVA_COLORS = @json(\App\Models\ProductColor::filterMap());
+    window.SILVA_COLORS = @json($homeColorMap);
     window.SILVA_PRODUCTS = @json($homeProducts);
-    window.SILVA_HOME_FEATURED = @json($homeProducts->pluck('code')->values());
-    window.SILVA_PRODUCTS_URL = @json(m_url('products'));
+    window.SILVA_HOME_FEATURED = @json($homeProductCodes);
+    window.SILVA_PRODUCTS_URL = @json($homeProductsUrl);
+    window.silvaProjectHref = function (p) {
+      return p.url || (window.SILVA_PROJECTS_URL + '/' + encodeURIComponent(p.slug || p.id));
+    };
+    (function () {
+      const base = (window.SILVA_BASE || '').replace(/\/$/, '') + '/';
+      const fix = function (p) {
+        if (!p || /^https?:\/\//i.test(p) || p.startsWith('/') || p.startsWith('data:')) return p;
+        return base + p.replace(/^\.\//, '');
+      };
+      (window.SILVA_PRODUCTS || []).forEach(function (p) {
+        p.img = fix(p.img);
+        p.imgHover = fix(p.imgHover);
+        p.imgs = (p.imgs || []).map(fix);
+        if (p.url && !/^https?:\/\//i.test(p.url)) p.url = fix(p.url);
+      });
+      window.silvaHref = function (p) {
+        return base + 'urun.html?code=' + encodeURIComponent(p.code);
+      };
+    })();
   </script>
   <script src="{{ silva_asset('js/products.js') }}"></script>
   <script src="{{ silva_asset('js/projects.js') }}"></script>
