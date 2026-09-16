@@ -16,14 +16,14 @@
       <button type="button" id="menu-toggle" class="pill-btn group inline-flex items-center gap-2 rounded-full px-5 py-3 text-[14px] font-medium md:px-6 md:text-[15px]" aria-expanded="false" aria-controls="nav-dropdown">
         <span>{{ __t('nav_menu', 'Menu', 'frontend') }}</span>
         <i class="bx bx-grid-alt text-[17px] transition duration-300" id="menu-toggle-icon"></i>
-      </button>
+                </button>
 
       <div id="nav-dropdown" class="nav-dropdown" aria-hidden="true">
         <div class="nav-drop-head">
           <span>{{ __t('nav_menu', 'Menu', 'frontend') }}</span>
           <button type="button" class="nav-drop-close" aria-label="{{ __t('nav_close', 'Kapat', 'frontend') }}">
             <i class="bx bx-x"></i>
-          </button>
+                    </button>
         </div>
         <nav class="nav-dropdown-inner">
           <a href="{{ $homeUrl }}#neden" class="nav-drop-link">{{ __t('nav_features', 'Özellikler', 'frontend') }}</a>
@@ -40,25 +40,26 @@
             </div>
             <a href="{{ $contactUrl }}" class="nav-drop-cta">{{ __t('nav_quote', 'Teklif Al', 'frontend') }}</a>
             <a href="tel:{{ $phoneRaw }}" class="nav-drop-phone">{{ $phoneLabel }}</a>
-          </div>
-        </nav>
-      </div>
+                </div>
+</nav>
+        </div>
     </div>
 
     <a href="{{ $homeUrl }}" class="header-brand justify-self-center flex flex-col items-center leading-none">
-      <img src="{{ silva_asset('assets/silvalogo-white.png') }}" alt="Silva Stone" class="logo-header-light h-12 w-auto md:h-14" />
-      <img src="{{ silva_asset('assets/silvalogo.png') }}" alt="Silva Stone" class="logo-header-dark hidden h-12 w-auto md:h-14" />
+      @php($silvaLogo = silva_asset('assets/silvalogo.png') . '?v=' . (@filemtime(public_path('silvastone/assets/silvalogo.png')) ?: time()))
+      <img src="{{ $silvaLogo }}" alt="Silva Stone" class="logo-header-light logo-on-dark h-12 w-auto md:h-14" />
+      <img src="{{ $silvaLogo }}" alt="Silva Stone" class="logo-header-dark hidden h-12 w-auto md:h-14" />
     </a>
 
     <div class="header-actions flex items-center justify-self-end gap-2 md:gap-2.5">
       <div class="pill-btn header-lang flex overflow-hidden rounded-full text-[13px] font-medium tracking-wide md:text-[14px]" role="group" aria-label="{{ __t('nav_lang', 'Dil', 'frontend') }}">
         <a href="{{ lang_url(request()->path(), 'tr') }}" class="lang-btn {{ $lang === 'tr' ? 'is-active' : '' }} px-3 py-3 md:px-4" data-lang="tr">TR</a>
         <a href="{{ lang_url(request()->path(), 'en') }}" class="lang-btn {{ $lang === 'en' ? 'is-active' : '' }} px-3 py-3 md:px-4" data-lang="en">EN</a>
-      </div>
+            </div>
       <a href="{{ $contactUrl }}" class="pill-btn header-cta inline-flex items-center gap-1.5 rounded-full px-4 py-3 text-[13px] font-medium md:gap-2 md:px-6 md:text-[15px]">
         <span class="header-cta-text">{{ __t('nav_quote', 'Teklif Al', 'frontend') }}</span>
         <i class="bx bx-plus text-[17px]"></i>
       </a>
     </div>
-  </div>
+</div>
 </header>

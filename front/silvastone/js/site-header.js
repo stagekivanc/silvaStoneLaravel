@@ -56,7 +56,7 @@
       </div>
     </div>
     <a href="index.html" class="header-brand justify-self-center flex flex-col items-center leading-none">
-      <img src="assets/silvalogo-white.png" alt="Silva Stone" class="logo-header-light h-12 w-auto md:h-14" />
+      <img src="assets/silvalogo.png" alt="Silva Stone" class="logo-header-light logo-on-dark h-12 w-auto md:h-14" />
       <img src="assets/silvalogo.png" alt="Silva Stone" class="logo-header-dark hidden h-12 w-auto md:h-14" />
     </a>
     <div class="header-actions flex items-center justify-self-end gap-2 md:gap-2.5">

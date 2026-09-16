@@ -31,7 +31,7 @@
       <div class="grid gap-12 border-b border-white/10 pb-14 lg:grid-cols-12 lg:gap-10">
         <div class="site-footer-brand lg:col-span-4">
           <a href="index.html" class="inline-flex flex-col items-start">
-            <img src="assets/silvalogo-white.png" alt="Silva Stone" class="h-12 w-auto md:h-14" />
+            <img src="assets/silvalogo.png" alt="Silva Stone" class="logo-on-dark h-12 w-auto md:h-14" />
           </a>
           <p class="mt-5 max-w-sm text-sm font-light leading-relaxed">
             Silva Stone, Acarkon Orman Ürünleri ürün ailesinin dekoratif taş duvar paneli markasıdır.
