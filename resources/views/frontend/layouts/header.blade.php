@@ -35,8 +35,8 @@
           <div class="nav-drop-mobile">
             <p class="nav-drop-label">{{ __t('nav_lang', 'Dil', 'frontend') }}</p>
             <div class="nav-drop-langs" role="group" aria-label="{{ __t('nav_lang', 'Dil', 'frontend') }}">
-              <a href="{{ route('home', ['lang' => 'tr']) }}" class="lang-btn {{ $lang === 'tr' ? 'is-active' : '' }}" data-lang="tr">TR</a>
-              <a href="{{ route('home', ['lang' => 'en']) }}" class="lang-btn {{ $lang === 'en' ? 'is-active' : '' }}" data-lang="en">EN</a>
+              <a href="{{ lang_url(request()->path(), 'tr') }}" class="lang-btn {{ $lang === 'tr' ? 'is-active' : '' }}" data-lang="tr">TR</a>
+              <a href="{{ lang_url(request()->path(), 'en') }}" class="lang-btn {{ $lang === 'en' ? 'is-active' : '' }}" data-lang="en">EN</a>
             </div>
             <a href="{{ $contactUrl }}" class="nav-drop-cta">{{ __t('nav_quote', 'Teklif Al', 'frontend') }}</a>
             <a href="tel:{{ $phoneRaw }}" class="nav-drop-phone">{{ $phoneLabel }}</a>
@@ -52,8 +52,8 @@
 
     <div class="header-actions flex items-center justify-self-end gap-2 md:gap-2.5">
       <div class="pill-btn header-lang flex overflow-hidden rounded-full text-[13px] font-medium tracking-wide md:text-[14px]" role="group" aria-label="{{ __t('nav_lang', 'Dil', 'frontend') }}">
-        <a href="{{ route('home', ['lang' => 'tr']) }}" class="lang-btn {{ $lang === 'tr' ? 'is-active' : '' }} px-3 py-3 md:px-4" data-lang="tr">TR</a>
-        <a href="{{ route('home', ['lang' => 'en']) }}" class="lang-btn {{ $lang === 'en' ? 'is-active' : '' }} px-3 py-3 md:px-4" data-lang="en">EN</a>
+        <a href="{{ lang_url(request()->path(), 'tr') }}" class="lang-btn {{ $lang === 'tr' ? 'is-active' : '' }} px-3 py-3 md:px-4" data-lang="tr">TR</a>
+        <a href="{{ lang_url(request()->path(), 'en') }}" class="lang-btn {{ $lang === 'en' ? 'is-active' : '' }} px-3 py-3 md:px-4" data-lang="en">EN</a>
       </div>
       <a href="{{ $contactUrl }}" class="pill-btn header-cta inline-flex items-center gap-1.5 rounded-full px-4 py-3 text-[13px] font-medium md:gap-2 md:px-6 md:text-[15px]">
         <span class="header-cta-text">{{ __t('nav_quote', 'Teklif Al', 'frontend') }}</span>

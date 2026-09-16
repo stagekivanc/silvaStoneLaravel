@@ -16,18 +16,14 @@ class StaticTranslation extends Model
             ->where('key', $key)
             ->first();
 
-        if (!$translation) {
-            return self::firstOrCreate(
-                ['lang_key' => $lang, 'group' => $group, 'key' => $key],
-                ['value' => $default !== '' ? $default : $key]
-            )->value ?: ($default !== '' ? $default : $key);
+        if ($translation) {
+            $value = trim((string) ($translation->value ?? ''));
+            if ($value !== '') {
+                return $value;
+            }
         }
 
-        $value = trim((string) ($translation->value ?? ''));
-        if ($value !== '') {
-            return $value;
-        }
-
+        // Never persist call-site defaults (often Turkish) into other locales.
         return $default !== '' ? $default : $key;
     }
 }

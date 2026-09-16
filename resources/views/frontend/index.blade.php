@@ -279,9 +279,18 @@
       ->get()
       ->map(fn ($p) => $p->toFrontendArray())
       ->values();
+    $homeCats = array_merge(
+      ['all' => __t('ui_all', 'Tümü', 'frontend')],
+      \App\Models\ProductCategory::query()
+        ->where('status', true)
+        ->orderBy('order')
+        ->get()
+        ->mapWithKeys(fn ($c) => [$c->slug => $c->name])
+        ->all()
+    );
   @endphp
   <script>
-    window.SILVA_CATS = @json(array_merge(['all' => __t('ui_all', 'Tümü', 'frontend')], \App\Models\ProductCategory::query()->where('status', true)->orderBy('order')->get()->mapWithKeys(fn ($c) => [$c->slug => $c->name])->all()));
+    window.SILVA_CATS = @json($homeCats);
     window.SILVA_COLORS = @json(\App\Models\ProductColor::filterMap());
     window.SILVA_PRODUCTS = @json($homeProducts);
     window.SILVA_HOME_FEATURED = @json($homeProducts->pluck('code')->values());
