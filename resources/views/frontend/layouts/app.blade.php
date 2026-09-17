@@ -92,8 +92,10 @@
     };
   </script>
   @stack('head')
+  {!! \App\Models\Setting::get('header_scripts', '') !!}
 </head>
 <body class="text-ink font-sans antialiased overflow-x-hidden @yield('body_class', 'bg-white')" @yield('body_attrs')>
+  {!! \App\Models\Setting::get('body_scripts', '') !!}
   @include('frontend.layouts.header')
 
   <main id="top">
